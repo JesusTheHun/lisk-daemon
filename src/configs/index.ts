@@ -1,5 +1,5 @@
 import userConfig from '../config';
-import { Config } from '../interfaces';
+import { Config } from '../types';
 
 declare const process: {
   env: {

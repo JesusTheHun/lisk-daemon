@@ -4,10 +4,10 @@ import crypto from 'crypto';
 import * as disk from 'diskusage';
 import util from 'util';
 
-import { liskPath, snapshotServer } from '../constants';
-import { ISystemInfo } from '../interfaces';
+import { liskPath, networks, logFormats, snapshotServer } from '../constants';
+import { SystemInfo } from '../types';
 
-export const getSystemInfo = async (): Promise<ISystemInfo> => {
+export const getSystemInfo = async (): Promise<SystemInfo> => {
   const path = os.platform() === 'win32' ? 'c:' : '/';
 
   const { total, free } = await disk.check(path);
@@ -46,3 +46,19 @@ export const hash = (data: string): string =>
     .createHash('sha256')
     .update(data)
     .digest('hex');
+
+export const isNetworkValid = (network: string | undefined): network is typeof networks[number] => {
+  if (network === undefined) return false;
+  return (networks as unknown as string[]).includes(network);
+}
+
+export const isLogFormatValid = (logFormat: string | undefined): logFormat is typeof logFormats[number] => {
+  if (logFormat === undefined) return false;
+  return (logFormats as unknown as string[]).includes(logFormat);
+}
+
+export const stringListToArray = (str: string | undefined): string[] => {
+  if (str === undefined) return [];
+  if (str.length === 0) return [];
+  return str.split(',');
+}

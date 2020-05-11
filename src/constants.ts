@@ -12,3 +12,6 @@ export const supportedCommands: string[] = ['start', 'stop', 'reload', 'status']
 export const accessLogStream: fs.WriteStream = fs.createWriteStream(path.join(__dirname, config.logging.logFile), {
   flags: 'a'
 });
+
+export const networks = ['mainnet', 'testnet'] as const;
+export const logFormats = ['combined', 'common', 'dev', 'short', 'tiny'] as const;

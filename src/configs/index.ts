@@ -1,5 +1,5 @@
 import userConfig from '../config';
-import { IConfig } from '../interfaces';
+import { Config } from '../interfaces';
 
 declare const process: {
   env: {
@@ -9,7 +9,7 @@ declare const process: {
 
 const env = process.env.NODE_ENV;
 
-const template: IConfig = {
+const template: Config = {
   api: {
     port: userConfig.api.port || 8765,
     whitelist: userConfig.api.whitelist || ['127.0.0.1', '::1', '::ffff:127.0.0.1'],
@@ -30,15 +30,15 @@ const template: IConfig = {
   }
 };
 
-const production: IConfig = {
+const production: Config = {
   ...template
 };
 
-const development: IConfig = {
+const development: Config = {
   ...template
 };
 
-const test: IConfig = {
+const test: Config = {
   ...template,
   nodeCommands: {
     allow: true,
